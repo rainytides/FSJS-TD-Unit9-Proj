@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
-  res.json({
+  res.send({
     message: 'Welcome to the REST API project!',
   });
 });
