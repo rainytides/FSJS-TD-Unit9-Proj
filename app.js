@@ -26,7 +26,7 @@ app.use('/api/courses', courseRoutes);
 
 // Setup a friendly greeting for the root route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the REST API project!' });
+  res.send('Welcome to the REST API project!');
 });
 
 // Add a 404 handler for when a route is not found
