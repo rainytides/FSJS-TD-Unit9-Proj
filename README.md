@@ -18,7 +18,7 @@ This project is a RESTful API using Express. It provides a way to administer a s
 
 ### Prerequisites
 
-You need Node.js and npm installed on your machine. This project was built against the following versions:
+Node.js and npm need to be installed on the machine. This project was built against the following versions:
 - Node.js v14.15.1
 - npm v6.14.8
 
