@@ -61,13 +61,22 @@ router.put('/:id', authenticateUser, asyncHandler(async (req, res) => {
 // DELETE /api/courses/:id - Deletes a course if the current user is the owner
 router.delete('/:id', authenticateUser, asyncHandler(async (req, res) => {
     const course = await Course.findByPk(req.params.id);
-    if (course && course.userId === req.currentUser.id) {
-        await course.destroy();
-        res.status(204).end();
-    } else {
-        res.status(course ? 403 : 404).json({ message: course ? 'You are not authorized to delete this course' : 'Course not found' });
+    if (!course) {
+        // If course does not exist, return 404 Not Found
+        return res.status(404).json({ message: 'Course not found' });
+    } 
+    
+    if (course.userId !== req.currentUser.id) {
+        // If the current user is not the owner, return 403 Forbidden
+        return res.status(403).json({ message: 'You are not authorized to delete this course' });
     }
+
+    // If the user is authorized, delete the course
+    await course.destroy();
+    // Return 204 No Content on successful deletion
+    res.status(204).end();
 }));
+
 
 // Export the router for use in the main app
 module.exports = router;
